@@ -1,7 +1,28 @@
+body{
+  margin: 0;
+  background: linear-gradient(#f6d365, #fda085);
+  height: 100vh;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+}
+
 #card{
   width: 200px;
   height: 120px;
   border-radius: 15px;
   background: white;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: move;
+}
+
+#card p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
