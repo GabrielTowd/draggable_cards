@@ -13,6 +13,25 @@ function clickCard(e){
   active = true;
 }
 
+function cardVelocityAngle(e, mouseClickPosX){
+  let velocity = e.movementX;
+  /* Reverse value of the speed */
+  velocity <= 0? velocity = Math.abs(velocity * 1.5) : velocity = -Math.abs(velocity * 1.5);
+  
+  /* Set the angle of the rotation depending on the position of the cursor in the card */
+  if(mouseClickPosX <= 0 ){
+    card.style.transform = `
+      translate(-50%, -50%) 
+      rotate(${Math.abs((mouseClickPosX + velocity)/5)}deg)
+    `;
+  } else{
+    card.style.transform = `
+      translate(-50%, -50%) 
+      rotate(${-Math.abs((mouseClickPosX + velocity)/5)}deg)
+    `;
+  }
+}
+
 function moveCard(e){
   if(active){
     let mousePosX = e.clientX;
@@ -20,16 +39,19 @@ function moveCard(e){
 
     card.style.left = `${mousePosX - mouseClickPosX}px`;
     card.style.top = `${mousePosY - mouseClickPosY}px`;
+
+    cardVelocityAngle(e, mouseClickPosX);
   }
 }
 
 function dragEnd(){
   cardPosX = card.offsetLeft;
   cardPosY = card.offsetTop;
+  card.style.transform = `translate(-50%, -50%) rotate(0deg)`;
 
   active = false;
 }
 
 card.addEventListener('mousedown', clickCard);
-card.addEventListener('mousemove', moveCard);
-card.addEventListener('mouseup', dragEnd);
+document.addEventListener('mousemove', moveCard);
+document.addEventListener('mouseup', dragEnd);
